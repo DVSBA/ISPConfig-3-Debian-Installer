@@ -165,6 +165,13 @@ deb http://ftp.us.debian.org/debian/ squeeze main contrib non-free
 deb http://ftp.us.debian.org/debian/ squeeze-updates main contrib non-free
 deb http://security.debian.org/ squeeze/updates main contrib non-free
 deb http://packages.dotdeb.org squeeze all
+deb http://packages.dotdeb.org squeeze-php54 all
+EOF
+
+cat > /etc/apt/preferences <<EOF
+Package: *
+Pin: release n=squeeze-php54
+Pin-Priority: 600
 EOF
 
 wget http://www.dotdeb.org/dotdeb.gpg
@@ -188,8 +195,8 @@ apt-get -y install ntp ntpdate
 install_MYSQLCourier (){
 
 #Install Postfix, Courier, Saslauthd, MySQL, phpMyAdmin, rkhunter, binutils
-echo "mysql-server-5.1 mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
-echo "mysql-server-5.1 mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
+echo "mysql-server-5.5 mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
+echo "mysql-server-5.5 mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
 echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
 echo "postfix postfix/mailname string $HOSTNAMEFQDN" | debconf-set-selections
 echo "courier-base courier-base/webadmin-configmode boolean false" | debconf-set-selections
@@ -217,8 +224,8 @@ mkpop3dcert
 install_MYSQLDovecot (){
 
 #Install Postfix, Courier, Saslauthd, MySQL, phpMyAdmin, rkhunter, binutils
-echo "mysql-server-5.1 mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
-echo "mysql-server-5.1 mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
+echo "mysql-server-5.5 mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
+echo "mysql-server-5.5 mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | debconf-set-selections
 echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
 echo "postfix postfix/mailname string $HOSTNAMEFQDN" | debconf-set-selections
 
