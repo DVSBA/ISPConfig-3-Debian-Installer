@@ -161,18 +161,25 @@ echo "$HOSTNAME" > /etc/hostname
 #Updates server and install commonly used utilities
 cp /etc/apt/sources.list /etc/apt/sources.list.backup
 cat > /etc/apt/sources.list <<EOF
-deb http://ftp.us.debian.org/debian/ squeeze main contrib non-free
-deb http://ftp.us.debian.org/debian/ squeeze-updates main contrib non-free
+deb http://ftp.nl.debian.org/debian/ squeeze main contrib non-free
+deb-src http://ftp.nl.debian.org/debian/ squeeze main contrib non-free
+
+deb http://ftp.nl.debian.org/debian/ squeeze-updates main contrib non-free
+deb-src http://ftp.nl.debian.org/debian/ squeeze-updates main contrib non-free
+
 deb http://security.debian.org/ squeeze/updates main contrib non-free
-deb http://packages.dotdeb.org squeeze all
-deb http://packages.dotdeb.org squeeze-php54 all
+deb-src http://security.debian.org/ squeeze/updates main contrib non-free
+
+deb http://mirror.nl.leaseweb.net/dotdeb/ squeeze all
+deb-src http://mirror.nl.leaseweb.net/dotdeb/ squeeze all
 EOF
 
-cat > /etc/apt/preferences <<EOF
-Package: *
-Pin: release n=squeeze-php54
-Pin-Priority: 600
-EOF
+#deb http://packages.dotdeb.org squeeze-php54 all
+#cat > /etc/apt/preferences <<EOF
+#Package: *
+#Pin: release n=squeeze-php54
+#Pin-Priority: 600
+#EOF
 
 wget http://www.dotdeb.org/dotdeb.gpg
 cat dotdeb.gpg | apt-key add -
